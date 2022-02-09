@@ -9,10 +9,25 @@ pragma solidity >=0.7.0 <0.9.0;
 
 contract MyContract {
     string name = "Hello World";
-address owner;
+    Person[] public persons;
 
+    address owner;
+
+struct Person{
+    string first_name;
+    string last_name;
+    uint age;
+    bool isMale; // 1 means Male 
+                //  0 means Female             
+}
+
+function addPerson(string memory fname,string memory lname,uint _age,bool _gender) public {
+persons.push(Person(fname,lname,_age,_gender));
+
+}
 constructor(){
-owner = tx.origin;
+owner = tx.origin; // gives the adress of the person who has deployed the contract
+
 }
 
 modifier onlyOwner(){
