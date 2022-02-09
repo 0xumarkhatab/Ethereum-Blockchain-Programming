@@ -15,15 +15,30 @@ constructor(){
 owner = tx.sender;
 }
 
+
+// if the message sender is owner , return true 
+// otherwise don't allow certain functionality 
+// upon which the modifier is applied
+
 modifier onlyOwner(){
 return (owner == msg.sender);
 
 }
 
+// if we don't wanna change a function , we will 
+// be needing to put the view modifier that this function 
+// is capable of
+
     function getName () public view returns (string memory) {
         return name;
 
     }
+// Note , We Don't have any modifiers here other than public
+
+// but we have one Extra modifier  "onlyOwner"
+
+// which means that if the person calling the "setName " function is Owner,
+// then function call is Allowed , otherwise it's not !
 
     function setName(string memory _name) public onlyOwner{
         name =  _name;
