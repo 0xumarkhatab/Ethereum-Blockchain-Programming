@@ -10,8 +10,17 @@ pragma solidity >=0.7.0 <0.9.0;
 contract MyContract {
     string name = "Hello World";
 
-    function get () public view returns (string memory) {
+
+
+
+function getName () public view returns (string memory) {
         return name;
+
+    }
+
+
+    function setName(string memory _name) public{
+        name =  _name;
 
     }
 }
