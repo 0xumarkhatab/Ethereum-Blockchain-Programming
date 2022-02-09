@@ -9,19 +9,15 @@ pragma solidity >=0.7.0 <0.9.0;
 
 contract MyContract {
     string name = "Hello World";
-address payable owner;
+address owner;
 
 constructor(){
-owner = tx.sender;
+owner = tx.origin;
 }
 
-
-// if the message sender is owner , return true 
-// otherwise don't allow certain functionality 
-// upon which the modifier is applied
-
 modifier onlyOwner(){
-return (owner == msg.sender);
+require (owner ==  msg.sender);
+_;
 
 }
 
