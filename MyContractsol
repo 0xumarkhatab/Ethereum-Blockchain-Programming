@@ -1,3 +1,4 @@
+
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.7.0 <0.9.0;
@@ -6,53 +7,15 @@ pragma solidity >=0.7.0 <0.9.0;
  * @title Storage
  * @dev Store & retrieve value in a variable
  */
+contract MyContract{
 
-contract MyContract {
-    string name = "Hello World";
-    Person[] public persons;
+mapping(address => uint) public balances;
 
-    address owner;
-
-struct Person{
-    string first_name;
-    string last_name;
-    uint age;
-    bool isMale; // 1 means Male 
-                //  0 means Female             
-}
-
-function addPerson(string memory fname,string memory lname,uint _age,bool _gender) public {
-persons.push(Person(fname,lname,_age,_gender));
-
-}
-constructor(){
-owner = tx.origin; // gives the adress of the person who has deployed the contract
+function IncrementBalances() public {
+balances[msg.sender] +=1;
 
 }
 
-modifier onlyOwner(){
-require (owner ==  msg.sender);
-_;
 
-}
 
-// if we don't wanna change a function , we will 
-// be needing to put the view modifier that this function 
-// is capable of
-
-    function getName () public view returns (string memory) {
-        return name;
-
-    }
-// Note , We Don't have any modifiers here other than public
-
-// but we have one Extra modifier  "onlyOwner"
-
-// which means that if the person calling the "setName " function is Owner,
-// then function call is Allowed , otherwise it's not !
-
-    function setName(string memory _name) public onlyOwner{
-        name =  _name;
-
-    }
 }
