@@ -9,17 +9,23 @@ pragma solidity >=0.7.0 <0.9.0;
 
 contract MyContract {
     string name = "Hello World";
+address payable owner;
 
+constructor(){
+owner = tx.sender;
+}
 
+modifier onlyOwner(){
+return (owner == msg.sender);
 
+}
 
-function getName () public view returns (string memory) {
+    function getName () public view returns (string memory) {
         return name;
 
     }
 
-
-    function setName(string memory _name) public{
+    function setName(string memory _name) public onlyOwner{
         name =  _name;
 
     }
