@@ -9,35 +9,20 @@ pragma solidity >=0.7.0 <0.9.0;
  */
 contract MyContract{
 
+address payable owner;
 mapping(address => uint) public balances;
-address owner;
 
-error NotTheOwner(string);
-
-
-constructor(){
-owner = tx.origin;
-}
-
-modifier onlyOwner(){
-    string memory message ="Only Owner is Allowed";
-
-    if(owner != msg.sender)
-        revert NotTheOwner(message);
-    else
-        require(true);
-_;
-
+constructor(address payable _wallet){
+  owner = _wallet;
 
 }
 
-
-function IncrementBalances() public onlyOwner{
-
-balances[msg.sender] +=1;
+function transferFunds()public payable{
+    balances[owner]+=1;
+    owner.transfer(msg.value);
+    
 
 }
-
 
 
 }
